@@ -94,3 +94,33 @@ a.more{
   background: #ccc;
   margin-bottom:12px;
 }
+
+input, select, textarea{
+  margin-bottom:15px;
+}
+
+label{
+  display: inline-block;
+  width: 180px;
+}
+
+input[type='text'],select,textarea{
+  padding:3px;
+  height: 20px;
+  width: 200px;
+  border: 1px #ccc solid;
+}
+
+select{
+  height:30px;
+}
+
+textarea{
+  height: 90px;
+  width: 450px;
+}
+
+form{
+  border: 1px solid black;
+  padding:10px;
+}
