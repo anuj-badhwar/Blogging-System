@@ -124,3 +124,15 @@ form{
   border: 1px solid black;
   padding:10px;
 }
+
+.success{
+  background-color: lightgreen;
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
