@@ -7,7 +7,9 @@ block content
         h1
           a(href='/posts/show/#{post._id}')
            =post.title
-        p.meta Posted in #{post.category} by #{post.author} on #{moment(post.date).format("MM-DD-YYYY")}
-        img.blogpics(src='images/#{post.mainimage}')
+        p.meta Posted in 
+          a(style="color:#b00",href='/categories/show/#{post.category}') #{post.category} 
+          | by #{post.author} on #{moment(post.date).format("MM-DD-YYYY")}
+        img.blogpics(src='/images/#{post.mainimage}')
         !=truncateText(post.body,400)
         a.more(href='/posts/show/#{post._id}') Read More
