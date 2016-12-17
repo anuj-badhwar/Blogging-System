@@ -81,4 +81,61 @@ router.post('/add',upload.single('mainimage'), function(req, res, next) {
 
 });
 
+router.post('/addcomment', function(req, res, next) {
+  //Get form values
+  var name = req.body.name;
+  var email = req.body.email;
+  var postid = req.body.postid;
+  var body = req.body.body;
+  var commentdate = new Date();
+
+  //Form Validation
+  req.checkBody('name','Title Field is Required!').notEmpty();
+  req.checkBody('email','Email field is required but never Displayed').notEmpty();
+    req.checkBody('email','Please enter a valid Email').isEmail();
+  req.checkBody('body','Body field is required!').notEmpty();
+  //Check errors
+  var errors = req.validationErrors();
+
+  if(errors){
+    var posts = db.get('posts');
+      posts.findById(postid,function(err,post){
+              res.render('show',{
+                "error":errors,
+                "post":post
+              })
+      });
+  }
+
+  else{
+    var comment = {
+      "name":name,
+      "email":email,
+      "body":body,
+      "commentdate":commentdate
+    }
+
+    var posts = db.get('posts');
+
+    posts.update({
+      "_id":postid
+    },{
+      $push:{
+        "comments":comment
+      }
+    },function(err,doc){
+      if(err){
+        throw err;
+      }
+      else{
+        req.flash("success","Comment Added");
+        res.location('/posts/show/'+postid);
+        res.redirect('/posts/show/'+postid);
+      }
+    });
+  }
+
+});
+
+
 module.exports = router;
