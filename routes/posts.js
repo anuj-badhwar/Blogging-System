@@ -19,6 +19,17 @@ router.get('/add', function(req, res, next) {
     })
 });
 
+router.get('/show/:id',function(req,res){
+  var id = req.params.id;
+  var posts = db.get('posts');
+
+  posts.findById(id,function(err,post){
+    res.render('show',{
+      'post':post
+    });
+  })
+});
+
 router.post('/add',upload.single('mainimage'), function(req, res, next) {
   //Get form values
   var title = req.body.title;

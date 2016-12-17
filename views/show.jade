@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .post
+    h1 #{post.title}
+    p.meta Posted in 
+      a(style="color:#b00",href='/categories/show/#{post.category}') #{post.category} 
+      | by #{post.author} on #{moment(post.date).format("MM-DD-YYYY")}
+    img.blogpics(src='/images/#{post.mainimage}')
+    !=post.body
